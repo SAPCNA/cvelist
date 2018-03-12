@@ -2,10 +2,10 @@
 
 ## Notes
 
-1.  Only members of the CVE Automation Working Group AND who are also [Root Level CNA's](https://cve.mitre.org/cve/cna.html) should create
+1.  Only [Root CNAs](https://cve.mitre.org/cve/cna.html) or other members of the CVE Automation Working Group should create
 pull requests or open issues in this repository currently.  Going
-forward, we hope to allow progressively wider participation; eg, from
-CNAs generally and then security researchers and other cybersecurity
+forward, we hope to allow wider participation; eg, from
+security researchers and other cybersecurity
 community members.  Until then, others who wish to contribute should
 use the [CVE Request web form](https://cveform.mitre.org). If you are a sub-CNA (e.g. the Kubernetes Project is a sub-CNA of the DWF) you MUST push within your hierarchy first according to the rules within that hierarchy. For example if you are within the DWF you MUST push to your immediate parents fork of the cvelist repo (e.g. for Kubernetes this would be the the DWF cvelist fork at https://github.com/distributedweaknessfiling/cvelist).  
 
@@ -95,10 +95,10 @@ python -m json.tool < CVE-2017-1234.json
 You can also validate against the schema using a variety of tools, e.g. Python jsonschema:
 
 ```
-jsonschema -i CVE_JSON_4.0_min.schema CVE-2017-1234.json
+jsonschema -i CVE-2017-1234.json CVE_JSON_4.0_min_public.schema
 ```
 
-The schema file is available in the [CVE Automation Working Group](https://github.com/CVEProject/automation-working-group/tree/master/cve_json_schema) and [version 4](https://raw.githubusercontent.com/CVEProject/automation-working-group/master/cve_json_schema/CVE_JSON_4.0_min.schema) is currently in use. 
+The schema file is available in the [CVE Automation Working Group](https://github.com/CVEProject/automation-working-group/tree/master/cve_json_schema) and [version 4](https://raw.githubusercontent.com/CVEProject/automation-working-group/master/cve_json_schema/CVE_JSON_4.0_min_public.schema) is currently in use.
 
 
 5. **Review your updates carefully** and make sure they contain
@@ -129,11 +129,24 @@ Github reports that the branches can be merged.  If not, say because
 you forgot to ensure your fork was synched with the upstream master,
 make additional commits in your branch to resolve the merge conflicts. 
 
-After a pull request has been submitted, the CVE Team will review the
-submission and work with you to resolve issues.  Then the CVE Team
-will merge the updated files into the "master" branch and use the
-supplied information to update the associated entries in the CVE List
-itself. 
+After a pull request has been submitted, several checks will be
+launched automatically, such as to perform schema validation and check
+ownership.  The checks may add comments and labels to the pull request
+and, by default, Github should notify you via email of those
+automatically.  If the checks identify issues, you will need to
+address them before processing can continue. 
+
+Next, the CVE Team generally will also review the pull request,
+ensuring that descriptions contain product and version information,
+references provide provenance, etc.  As before, reviewers will add
+comments and labels to the pull request if additional issues are
+found, and you will need to address those before processing can
+continue. 
+
+Finally, the CVE Team will add an "accepted" label in the pull
+request, merge the updated files into the "master" branch, and use the
+supplied information to populate the associated entries in the CVE
+List itself. 
 
 Here is a visual respresentation of the git process:
 
@@ -152,6 +165,12 @@ github.com/CVEProject/cvelist --> fork --> github.com/$YOU/cvelist
                   |                                   V             some_other_branch
                   `-- push to your github <-- $YOUR_BRANCH
 ```
+
+Note that you may contact the CVE Team using the [CVE Request web
+form](https://cveform.mitre.org) if you wish to discuss something
+privately.  Note also that pull requests left open for more than 21
+days will be rejected. 
+
 
 ## Contact
 
